@@ -191,7 +191,7 @@ local function CheckIfBad(Instance)
 end
 if _G.SendNotifications then
     StarterGui:SetCore("SendNotification", {
-        Title = "discord.gg/rips",
+        Title = "gg/tsbhub",
         Text = "Loading FPS Booster...",
         Duration = math.huge,
         Button1 = "Okay"
