@@ -1,3 +1,6 @@
+-- MADE BY TSBHub
+-- send issues or suggestions to my discord: discord.gg/tsbhub
+
 if not _G.Ignore then
     _G.Ignore = {} -- Add Instances to this table to ignore them (e.g. _G.Ignore = {workspace.Map, workspace.Map2})
 end
@@ -5,7 +8,7 @@ if not _G.WaitPerAmount then
     _G.WaitPerAmount = 500 -- Set Higher or Lower depending on your computer's performance
 end
 if _G.SendNotifications == nil then
-    _G.SendNotifications = false -- Set to false if you don't want notifications
+    _G.SendNotifications = true -- Set to false if you don't want notifications
 end
 if _G.ConsoleLogs == nil then
     _G.ConsoleLogs = false -- Set to true if you want console logs (mainly for debugging)
@@ -67,8 +70,10 @@ if not _G.Settings then
         }
     }
 end
+
 local Players, Lighting, StarterGui, MaterialService = game:GetService("Players"), game:GetService("Lighting"), game:GetService("StarterGui"), game:GetService("MaterialService")
 local ME, CanBeEnabled = Players.LocalPlayer, {"ParticleEmitter", "Trail", "Smoke", "Fire", "Sparkles"}
+
 local function PartOfCharacter(Instance)
     for i, v in pairs(Players:GetPlayers()) do
         if v ~= ME and v.Character and Instance:IsDescendantOf(v.Character) then
@@ -77,6 +82,7 @@ local function PartOfCharacter(Instance)
     end
     return false
 end
+
 local function DescendantOfIgnore(Instance)
     for i, v in pairs(_G.Ignore) do
         if Instance:IsDescendantOf(v) then
@@ -85,8 +91,9 @@ local function DescendantOfIgnore(Instance)
     end
     return false
 end
+
 local function CheckIfBad(Instance)
-    if not Instance:IsDescendantOf(Players) and (_G.Settings.Players["Ignore Others"] and not PartOfCharacter(Instance) or not _G.Settings.Players["Ignore Others"]) and (_G.Settings.Players["Ignore Me"] and ME.Character and not Instance:IsDescendantOf(ME.Character) or not _G.Settings.Players["Ignore Me"]) and (_G.Settings.Players["Ignore Tools"] and not Instance:IsA("BackpackItem") and not Instance:FindFirstAncestorWhichIsA("BackpackItem") or not _G.Settings.Players["Ignore Tools"])--[[not PartOfCharacter(Instance)]] and (_G.Ignore and not table.find(_G.Ignore, Instance) and not DescendantOfIgnore(Instance) or (not _G.Ignore or type(_G.Ignore) ~= "table" or #_G.Ignore <= 0)) then
+    if not Instance:IsDescendantOf(Players) and (_G.Settings.Players["Ignore Others"] and not PartOfCharacter(Instance) or not _G.Settings.Players["Ignore Others"]) and (_G.Settings.Players["Ignore Me"] and ME.Character and not Instance:IsDescendantOf(ME.Character) or not _G.Settings.Players["Ignore Me"]) and (_G.Settings.Players["Ignore Tools"] and not Instance:IsA("BackpackItem") and not Instance:FindFirstAncestorWhichIsA("BackpackItem") or not _G.Settings.Players["Ignore Tools"]) and (_G.Ignore and not table.find(_G.Ignore, Instance) and not DescendantOfIgnore(Instance) or (not _G.Ignore or type(_G.Ignore) ~= "table" or #_G.Ignore <= 0)) then
         if Instance:IsA("DataModelMesh") then
             if _G.Settings.Meshes.NoMesh and Instance:IsA("SpecialMesh") then
                 Instance.MeshId = ""
@@ -181,4 +188,4 @@ local function CheckIfBad(Instance)
             if _G.Settings.MeshParts and _G.Settings.MeshParts.NoMesh then
                 Instance.MeshId = ""
             end
-            if _G.Settings["No MeshParts"] or (_G.Settings.Other and _G
+            if _G.Settings["No MeshParts"] or (_G.Settings.Other and _G.Settings.Other
